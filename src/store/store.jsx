@@ -1,4 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
+import LevelMapper from "../utilities/levelMapper.js";
+import getRandomNumber from '../utilities/math.jsx'
+
 
 const numberSlice = createSlice({
   name: 'counter',
@@ -6,11 +9,12 @@ const numberSlice = createSlice({
     number1: 0,
     number2: 0,
     answer: 0,
-    level: 0
+    level: 1
   },
   reducers: {
     setNumbers: (state) => {
-      state.number1 = Math.floor(Math.random() * state.level) + 1;
+      const [min, max] = LevelMapper.get(state.level);
+      state.number1 = getRandomNumber(min, max);
       state.number2 = Math.floor(Math.random() * 10) + 1
     },
     setAnswer: (state) => { state.answer = state.number1 * state.number2 },
@@ -19,7 +23,6 @@ const numberSlice = createSlice({
       state.number1 = Math.floor(Math.random() * 6) + 1;
       state.number2 = Math.floor(Math.random() * 10) + 1;
       state.answer = state.number1 * state.number2;
-      state.level = 0;
     }
   }
 });

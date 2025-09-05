@@ -2,38 +2,28 @@ import React, { useState, useEffect, useRef } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {setLevel, setNumbers} from "../store/store.jsx";
 
-// Level mapper allows us to set the table start for each level.
-// i.e. when level is 2, multiple questions will start form table of 4.
-const LevelMapper = new Map([
-  [1, 1],
-  [2, 4],
-  [3, 7],
-  [4, 9],
-]);
-
 function Header({props}) {
 
-  const [selectedLevel, setSelectedLevel] = useState(1);
+  const selectedLevel = useSelector(state => state.counter.level);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const dispatch = useDispatch();
 
   const levels = [
     { value: 1, label: "Level 1 - Table of 1 - 3", emoji: "🟢" },
-    { value: 2, label: "Level 2 - Table of 4 - 6", emoji: "🟡" },
-    { value: 3, label: "Level 3 - Table of 7 - 8", emoji: "🟠" },
-    { value: 4, label: "Level 10 - Table of 9 - 10", emoji: "⭐" }
+    { value: 2, label: "Level 2 - Table of 2 - 4", emoji: "🟡" },
+    { value: 3, label: "Level 3 - Table of 5 - 7", emoji: "🟠" },
+    { value: 4, label: "Level 10 - Table of 8 - 10", emoji: "⭐" }
   ];
 
   const currentLevel = levels.find(level => level.value === selectedLevel);
 
   const handleLevelChange = (levelValue) => {
-    setSelectedLevel(levelValue);
     setIsDropdownOpen(false);
 
     // Set the level in the state and set numbers again so we can start from
     // specific table for that level.
-    dispatch(setLevel({level: LevelMapper.get(levelValue)}))
+    dispatch(setLevel({level: levelValue}))
     dispatch(setNumbers())
   };
 

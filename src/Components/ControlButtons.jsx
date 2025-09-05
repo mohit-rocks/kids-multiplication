@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import {useDispatch, useSelector, useStore} from 'react-redux';
-import { reset } from '../store/store.jsx';
+import {reset, setLevel, setNumbers} from '../store/store.jsx';
 
 ControlButtons.propTypes = {
 
@@ -8,6 +8,7 @@ ControlButtons.propTypes = {
 
 function ControlButtons({props}) {
   const dispatch = useDispatch();
+  const {level: level} = useSelector(state => state.counter)
 
   const handleReset = () => {
     dispatch(reset());
@@ -25,6 +26,12 @@ function ControlButtons({props}) {
     speechSynthesis.speak(utterance);
   }
 
+  function nextLevel() {
+    const newLevel = level+1;
+    dispatch(setLevel({level: newLevel}));
+    dispatch(setNumbers());
+  }
+
   return (
     <>
       <div className="controls">
@@ -36,8 +43,8 @@ function ControlButtons({props}) {
           </svg>
           Hear It
         </button>
-        <button className="btn btn-secondary">Skip</button>
-        <button className="btn btn-primary" onClick={handleReset}>Next Level</button>
+        <button className="btn btn-secondary" onClick={handleReset}>Next</button>
+        <button className="btn btn-primary" onClick={nextLevel}>Next Level</button>
       </div>
     </>
   );
