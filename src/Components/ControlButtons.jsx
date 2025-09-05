@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import {useDispatch, useSelector, useStore} from 'react-redux';
-import {reset, setLevel, setNumbers} from '../store/store.jsx';
+import {reset, setAnswer, setLevel, setNumbers} from '../store/store.jsx';
 
 ControlButtons.propTypes = {
 
@@ -30,6 +30,7 @@ function ControlButtons({props}) {
     const newLevel = level+1;
     dispatch(setLevel({level: newLevel}));
     dispatch(setNumbers());
+    dispatch(setAnswer());
   }
 
   return (
