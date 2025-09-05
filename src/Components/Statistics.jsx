@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {useSelector} from "react-redux";
 
 Statistics.propTypes = {
@@ -7,17 +6,24 @@ Statistics.propTypes = {
 };
 
 function Statistics({props}) {
-  const { right: right, wrong: wrong  } = useSelector(state => state.statistics);
-  const accuracy = (right + wrong === 0) ? 0 : (right/(right + wrong))*100;
+  const statistics = useSelector(state => state.statistics);
+  const { level } = useSelector(state => state.counter);
+
+  // Get current level statistics or fallback to 0 if not found.
+  const currentStats = statistics[level] || { right: 0, wrong: 0 };
+  const rightCount = currentStats.right;
+  const wrongCount = currentStats.wrong;
+  const accuracy = (rightCount + wrongCount === 0) ? 0 : (rightCount/(rightCount + wrongCount)) * 100;
+
   return (
     <>
       <div className="stats">
         <div className="stat-item">
-          <div className="stat-number">{right}</div>
+          <div className="stat-number">{rightCount}</div>
           <div className="stat-label">Correct</div>
         </div>
         <div className="stat-item">
-          <div className="stat-number">{wrong}</div>
+          <div className="stat-number">{wrongCount}</div>
           <div className="stat-label">Wrong</div>
         </div>
         <div className="stat-item">

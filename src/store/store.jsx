@@ -27,8 +27,10 @@ const numberSlice = createSlice({
 });
 
 const initialStatistics = {
-  right: 0,
-  wrong: 0,
+  1: { right: 0, wrong: 0 },
+  2: { right: 0, wrong: 0 },
+  3: { right: 0, wrong: 0 },
+  4: { right: 0, wrong: 0 }
 };
 const savedStatistics = localStorage.getItem("gameStats");
 if (savedStatistics) {
@@ -39,15 +41,25 @@ const statisticsSlice = createSlice({
   name: 'statistics',
   initialState: initialStatistics,
   reducers: {
-    setRight: (state) => {
-      state.right += 1;
+    setRight: (state, action) => {
+      const level = action.payload.level;
+      if (!state[level]) {
+        state[level] = { right: 0, wrong: 0 };
+      }
+      state[level].right += 1;
     },
-    setWrong: (state) => {
-      state.wrong += 1;
+    setWrong: (state, action) => {
+      const level = action.payload.level;
+      if (!state[level]) {
+        state[level] = { right: 0, wrong: 0 };
+      }
+      state[level].wrong += 1;
     },
     resetStatistics: (state) => {
-      state.right = 0;
-      state.wrong = 0;
+      Object.keys(state).forEach((level) => {
+        state[level].right = 0;
+        state[level].wrong = 0;
+      });
     }
   }
 });

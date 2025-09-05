@@ -6,6 +6,7 @@ import { setRight, setWrong } from '../store/store.jsx';
 function Answer() {
   const dispatch = useDispatch();
   const { answer: correctAnswer } = useSelector(state => state.counter);
+  const { level } = useSelector(state => state.counter);
 
   // Generate number options.
   let results = [correctAnswer];
@@ -27,12 +28,12 @@ function Answer() {
 
       // Dispatch the redux event to update right questions count.
       // See store.jsx for the exposed functions.
-      dispatch(setRight())
+      dispatch(setRight({level: level}))
     }
     else {
       button.className = "answer-btn incorrect";
       // Dispatch the redux event to update wrong questions count.
-      dispatch(setWrong())
+      dispatch(setWrong({level: level}))
       // Get the other elements and highlight the correct element.
       allButtons.forEach((btn) => {
         if (parseInt(btn.textContent) === correctAnswer) {
