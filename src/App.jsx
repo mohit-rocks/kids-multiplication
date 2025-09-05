@@ -8,6 +8,7 @@ import Statistics from "./Components/Statistics.jsx";
 import ControlButtons from "./Components/ControlButtons.jsx";
 import { Provider, useDispatch } from "react-redux";
 import store, { reset } from './store/store.jsx';
+import Footer from "./Components/Footer.jsx";
 
 function AppContent() {
   const dispatch = useDispatch();
@@ -18,21 +19,13 @@ function AppContent() {
 
   return (
     <div className={"quiz-container"}>
-      <Header>
-
-      </Header>
-      <ProgressBar>
-
-      </ProgressBar>
-      <Question>
-
-      </Question>
+      <Header></Header>
+      <ProgressBar></ProgressBar>
+      <Question></Question>
       <Answer></Answer>
-
       <ControlButtons></ControlButtons>
-      <Statistics>
-
-      </Statistics>
+      <Statistics></Statistics>
+      <Footer></Footer>
     </div>
   );
 }

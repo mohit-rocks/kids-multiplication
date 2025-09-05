@@ -2,7 +2,6 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 import LevelMapper from "../utilities/levelMapper.js";
 import getRandomNumber from '../utilities/math.jsx'
 
-
 const numberSlice = createSlice({
   name: 'counter',
   initialState: {
