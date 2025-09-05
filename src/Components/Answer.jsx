@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {useDispatch, useSelector} from 'react-redux';
 import reschuffle from "../utilities/reschuffle.jsx";
+import { setRight, setWrong } from '../store/store.jsx';
 
-Answer.propTypes = {
-  correctAnswer: PropTypes.number.isRequired
-};
-
-function Answer({correctAnswer}) {
+function Answer() {
+  const dispatch = useDispatch();
+  const { answer: correctAnswer } = useSelector(state => state.counter);
 
   // Generate number options.
   let results = [correctAnswer];
@@ -25,9 +24,15 @@ function Answer({correctAnswer}) {
 
     if (clickedValue === correctAnswer) {
       button.className = "answer-btn correct";
+
+      // Dispatch the redux event to update right questions count.
+      // See store.jsx for the exposed functions.
+      dispatch(setRight())
     }
     else {
       button.className = "answer-btn incorrect";
+      // Dispatch the redux event to update wrong questions count.
+      dispatch(setWrong())
       // Get the other elements and highlight the correct element.
       allButtons.forEach((btn) => {
         if (parseInt(btn.textContent) === correctAnswer) {
@@ -43,7 +48,7 @@ function Answer({correctAnswer}) {
       <div className="answers-grid">
         {
           results.map((number, index) => {
-            return <button key={index} className="answer-btn" id={index} onClick={calculateResult}>{number}</button>
+            return <button key={`${correctAnswer}-${index}`} className="answer-btn" id={index} onClick={calculateResult}>{number}</button>
           })
         }
       </div>

@@ -1,12 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-Question.propTypes = {
-  number1: PropTypes.bigint.isRequired,
-  number2: PropTypes.bigint.isRequired,
-};
-
-function Question({number1, number2}) {
+function Question() {
+  const { number1, number2 } = useSelector(state => state.counter);
   return (
     <>
       <div className="question-section pulse">

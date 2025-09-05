@@ -15,18 +15,37 @@ const numberSlice = createSlice({
     setAnswer: (state) => { state.answer = state.number1 * state.number2 },
     reset: (state) => {
       state.number1 = Math.floor(Math.random() * 6) + 1;
-      state.number2 = Math.floor(Math.random() * 10) + 1
+      state.number2 = Math.floor(Math.random() * 10) + 1;
+      state.answer = state.number1 * state.number2
+    }
+  }
+});
+
+const statisticsSlice = createSlice({
+  name: 'statistics',
+  initialState: {
+    right: 0,
+    wrong: 0
+  },
+  reducers: {
+    setRight: (state) => { state.right += 1 },
+    setWrong: (state) => { state.wrong += 1 },
+    resetStatistics: (state) => {
+      state.right = 0;
+      state.wrong = 0;
     }
   }
 });
 
 export const { setNumbers, setAnswer, reset } = numberSlice.actions;
+export const { setRight, setWrong, resetStatistics } = statisticsSlice.actions;
 
 // Create store
-const numberStore = configureStore({
+const store = configureStore({
   reducer: {
-    counter: numberSlice.reducer
+    counter: numberSlice.reducer,
+    statistics: statisticsSlice.reducer
   }
 });
 
-export default numberStore;
+export default store;

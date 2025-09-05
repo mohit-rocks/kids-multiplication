@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import './App.css'
 import Header from "./Components/Header.jsx";
 import ProgressBar from "./Components/ProgressBar.jsx";
@@ -6,38 +6,43 @@ import Question from "./Components/Question.jsx";
 import Answer from "./Components/Answer.jsx";
 import Statistics from "./Components/Statistics.jsx";
 import ControlButtons from "./Components/ControlButtons.jsx";
-import {Provider} from "react-redux";
-import numberStore from './store/numberStore.jsx';
+import { Provider, useDispatch } from "react-redux";
+import store, { reset } from './store/store.jsx';
 
-function App() {
+function AppContent() {
+  const dispatch = useDispatch();
 
-  // Generate number 1 and number 2.
-  const [number1, number2] = [1, 2].map(() => Math.floor(Math.random() * 6) + 1);
-  const correctAnswer = number1 * number2;
+  useEffect(() => {
+    dispatch(reset());
+  }, [dispatch]);
 
   return (
-    <>
-      <Provider store={numberStore}>
-        <div className={"quiz-container"}>
-          <Header>
+    <div className={"quiz-container"}>
+      <Header>
 
-          </Header>
-          <ProgressBar>
+      </Header>
+      <ProgressBar>
 
-          </ProgressBar>
-          <Question number1={number1} number2={number2}>
+      </ProgressBar>
+      <Question>
 
-          </Question>
-          <Answer correctAnswer={correctAnswer}></Answer>
+      </Question>
+      <Answer></Answer>
 
-          <ControlButtons></ControlButtons>
-          <Statistics>
+      <ControlButtons></ControlButtons>
+      <Statistics>
 
-          </Statistics>
-        </div>
-      </Provider>
-    </>
-  )
+      </Statistics>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <Provider store={store}>
+      <AppContent />
+    </Provider>
+  );
 }
 
 export default App
