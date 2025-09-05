@@ -5,18 +5,21 @@ const numberSlice = createSlice({
   initialState: {
     number1: 0,
     number2: 0,
-    answer: 0
+    answer: 0,
+    level: 0
   },
   reducers: {
     setNumbers: (state) => {
-      state.number1 = Math.floor(Math.random() * 6) + 1;
+      state.number1 = Math.floor(Math.random() * state.level) + 1;
       state.number2 = Math.floor(Math.random() * 10) + 1
     },
     setAnswer: (state) => { state.answer = state.number1 * state.number2 },
+    setLevel: (state, action) => {state.level = action.payload.level},
     reset: (state) => {
       state.number1 = Math.floor(Math.random() * 6) + 1;
       state.number2 = Math.floor(Math.random() * 10) + 1;
       state.answer = state.number1 * state.number2;
+      state.level = 0;
     }
   }
 });
@@ -47,7 +50,7 @@ const statisticsSlice = createSlice({
   }
 });
 
-export const { setNumbers, setAnswer, reset } = numberSlice.actions;
+export const { setNumbers, setAnswer, reset, setLevel } = numberSlice.actions;
 export const { setRight, setWrong, resetStatistics } = statisticsSlice.actions;
 
 // Create store
