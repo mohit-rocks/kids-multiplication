@@ -1,8 +1,10 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Question() {
+  const dispatch = useDispatch();
   const { number1, number2 } = useSelector(state => state.counter);
+
   return (
     <>
       <div className="question-section pulse">

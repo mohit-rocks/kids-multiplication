@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useRef} from 'react';
 import {useDispatch, useSelector, useStore} from 'react-redux';
 import { reset } from '../store/store.jsx';
 

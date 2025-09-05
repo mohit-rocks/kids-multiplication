@@ -1,9 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-Header.propTypes = {
-
-};
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 function Header({props}) {
   return (

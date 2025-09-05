@@ -16,20 +16,30 @@ const numberSlice = createSlice({
     reset: (state) => {
       state.number1 = Math.floor(Math.random() * 6) + 1;
       state.number2 = Math.floor(Math.random() * 10) + 1;
-      state.answer = state.number1 * state.number2
+      state.answer = state.number1 * state.number2;
     }
   }
 });
 
+const initialStatistics = {
+  right: 0,
+  wrong: 0,
+};
+const savedStatistics = localStorage.getItem("gameStats");
+if (savedStatistics) {
+  Object.assign(initialStatistics, JSON.parse(savedStatistics));
+}
+
 const statisticsSlice = createSlice({
   name: 'statistics',
-  initialState: {
-    right: 0,
-    wrong: 0
-  },
+  initialState: initialStatistics,
   reducers: {
-    setRight: (state) => { state.right += 1 },
-    setWrong: (state) => { state.wrong += 1 },
+    setRight: (state) => {
+      state.right += 1;
+    },
+    setWrong: (state) => {
+      state.wrong += 1;
+    },
     resetStatistics: (state) => {
       state.right = 0;
       state.wrong = 0;
@@ -46,6 +56,10 @@ const store = configureStore({
     counter: numberSlice.reducer,
     statistics: statisticsSlice.reducer
   }
+});
+
+store.subscribe(() => {
+  localStorage.setItem("gameStats", JSON.stringify(store.getState().statistics));
 });
 
 export default store;
