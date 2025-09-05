@@ -1,12 +1,20 @@
-# React + Vite
+# Multiplication App for Kids
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Provides simple React application that allows kids to learn multiplication table till 10 table.
+- Thanks to my daughter for the suggestions ✨💡
 
-Currently, two official plugins are available:
+## Features
+- Provides 20 questions for each level.
+- Each level is defined based on various table.
+  - Level 1: Table 1 to Table 3
+  - Level 2: Table 2 to Table 4
+  - Level 3: Table 5 to Table 7
+  - Level 4: Table 8 to Table 10
+- Progress is stored in localStorage.
+- Redux is used for the state management across various states.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Setup.
+- Clone this repo
+- `npm install`
+- `npm run dev`
+- Visit the URL
