@@ -8,7 +8,11 @@ ProgressBar.propTypes = {
 
 function ProgressBar(props) {
   const statistics = useSelector(state => state.statistics)
-  const progress = ((statistics.right + statistics.wrong)/20)*100;
+  const { level } = useSelector(state => state.counter)
+
+  const rightCount = statistics[level].right ?? 0;
+  const wrongCount = statistics[level].wrong ?? 0;
+  const progress = ((rightCount + wrongCount)/20)*100;
   return (
     <>
       <div className="progress-bar">
