@@ -1,6 +1,6 @@
 # Multiplication App for Kids
 
-- Provides simple React application that allows kids to learn multiplication table till 10 table.
+- This repository provides simple React application that allows kids to learn multiplication table till 10 table.
 - Thanks to my daughter for the suggestions ✨💡
 
 ## Features
